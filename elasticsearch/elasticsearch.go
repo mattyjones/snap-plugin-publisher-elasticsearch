@@ -36,7 +36,7 @@ type MetricToPublish struct {
 
 // Publish test publish function
 func (f FPublisher) Publish(mts []plugin.Metric, cfg plugin.Config) error {
-  url := "http://elk.formational.net:9200/snap/test"
+  url := "http://localhost:9200/snap/test"
 	var tagsForPrefix []string
 
   tagConfigs, err := cfg.GetString("prefix_tags")
