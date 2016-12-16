@@ -4,26 +4,20 @@ import (
         "bytes"
         "net/http"
         "encoding/json"
-        "fmt"
         "strings"
         "time"
+
+        log "github.com/Sirupsen/logrus"
         "github.com/intelsdi-x/snap-plugin-lib-go/v1/plugin"
-      	log "github.com/Sirupsen/logrus"
 )
 
-// FPublisher is a testing publisher.
-type FPublisher struct {
+type EPublisher struct {
 }
 
-/*
-        GetConfigPolicy() returns the configPolicy for your plugin.
-
-        A config policy is how users can provide configuration info to
-        plugin. Here you define what sorts of config info your plugin
-        needs and/or requires.
-*/
-func (f FPublisher) GetConfigPolicy() (plugin.ConfigPolicy, error) {
+func (f EPublisher) GetConfigPolicy() (plugin.ConfigPolicy, error) {
   policy := plugin.NewConfigPolicy()
+
+  policy.AddNewStringRule([]string{""}, "uri", false, plugin.SetDefaultString("http://localhost:9200/snap/default"))
   return *policy, nil
 }
 
@@ -34,9 +28,13 @@ type MetricToPublish struct {
   Timestamp string
 }
 
-// Publish test publish function
-func (f FPublisher) Publish(mts []plugin.Metric, cfg plugin.Config) error {
-  url := "http://localhost:9200/snap/test"
+// Publish Elasticsearch publish function
+func (f EPublisher) Publish(mts []plugin.Metric, cfg plugin.Config) error {
+  url, err := cfg.GetString("uri")
+	if err != nil {
+    log.Errorf("unable to parse elasticsearch uri from configs")
+		return err
+  }
 	var tagsForPrefix []string
 
   tagConfigs, err := cfg.GetString("prefix_tags")

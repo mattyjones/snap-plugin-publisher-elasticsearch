@@ -26,10 +26,10 @@ import (
 //
 
 const (
-        pluginName    = "test-elasticsearch-publisher"
+        pluginName    = "elasticsearch"
         pluginVersion = 1
 )
 
 func main() {
-        plugin.StartPublisher(elasticsearch.FPublisher{}, pluginName, pluginVersion)
+        plugin.StartPublisher(elasticsearch.EPublisher{}, pluginName, pluginVersion)
 }

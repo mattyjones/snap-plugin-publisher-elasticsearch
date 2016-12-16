@@ -1,6 +1,7 @@
 ## Elasticsearch Publisher for Snap Telemetry
 
 ### Todo
-- [ ] Add configuration variables
+- [x] Add configuration variable
+- [ ] Split configuration into multiple options
 - [ ] Add tests
 - [ ] Update naming to properly reflect Elasticsearch
