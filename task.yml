@@ -17,4 +17,4 @@
             file: "/tmp/psutil_metrics.log"
         - plugin_name: "elasticsearch"
           config:
-            uri: "http://elk.formational.net:9200/snap/test"
+            uri: "http://localhost:9200/snap/default"
