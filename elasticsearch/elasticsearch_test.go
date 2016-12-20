@@ -12,7 +12,7 @@ import (
 )
 
 func TestFilePublisher(t *testing.T) {
-        fp := FPublisher{}
+        fp := EPublisher{}
 
         Convey("Test publish", t, func() {
                 Convey("Publish without a config file", func() {
@@ -44,7 +44,7 @@ func TestFilePublisher(t *testing.T) {
                         So(err, ShouldBeNil)
                 })
                 Convey("Test GetConfigPolicy", func() {
-                        fp := FPublisher{}
+                        fp := EPublisher{}
                         _, err := fp.GetConfigPolicy()
 
                         Convey("No error returned", func() {
