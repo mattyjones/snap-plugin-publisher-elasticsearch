@@ -1,17 +1,9 @@
-FROM gliderlabs/alpine:latest
+FROM golang:latest
 
-ENV GOBIN=/usr/bin
-ENV GOPATH=/go
-ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/go/bin
+#ENV GOBIN=/usr/bin
+#ENV GOPATH=/go
 
-RUN apk add --update \
-  alpine-sdk \
-  bash \
-  go \
-  && rm -rf /var/cache/apk/*
-
-RUN mkdir -p /go/bin && mkdir -p /go/src && \
-  cd /go/bin && mkdir /go/src/formational\.net && \
+RUN mkdir -p /go/src/formational\.net && \
   mkdir /go/src/formational\.net/snap-plugin-publisher-elasticsearch && \
   curl https://glide.sh/get | sh && \
   go get github.com/Sirupsen/logrus && \
